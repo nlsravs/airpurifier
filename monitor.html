@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Air Quality Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #08dbee;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        #real-time-monitoring {
+            padding: 2rem 1rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(204, 193, 193, 0.1);
+            margin-top: 2rem;
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #real-time-monitoring .monitoring-container {
+            margin-top: 1rem;
+        }
+
+        #real-time-monitoring p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        #real-time-monitoring button {
+            background-color: #02bec5;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        #real-time-monitoring button:hover {
+            background-color: #2a6e86;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+
+
+
+        #home button.schedule-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    background-color: #06cb5b;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+#home button.schedule-btn:hover {
+    background-color: #2eff6d;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Real-Time Air Quality Monitoring</h1>
+    <section id="home">
+        <button class="schedule-btn" onclick="window.location.href='schedule.html'">View Schedule</button>
+    </section>
+</header>
+
+<section id="real-time-monitoring">
+    <h2>Monitor Your Air Quality</h2>
+    <div class="monitoring-container">
+        <p>Current Air Quality: <span id="air-quality-status">Loading...</span></p>
+        <p>PM2.5 Level: <span id="pm25-level">Loading...</span> µg/m³</p>
+        <p>CO2 Level: <span id="co2-level">Loading...</span> ppm</p>
+        <button id="update-btn">Update Now</button>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Real-Time Air Quality Monitoring</p>
+</footer>
+
+<script>
+    // Function to simulate the real-time air quality data
+    function simulateAirQualityData() {
+        // Simulate random air quality data
+        const pm25 = (Math.random() * 100).toFixed(2);  // PM2.5 level in µg/m³
+        const co2 = (Math.random() * 1000).toFixed(2);  // CO2 level in ppm
+        const airQualityStatus = getAirQualityStatus(pm25);
+
+        // Update the webpage with new values
+        document.getElementById('pm25-level').innerText = pm25;
+        document.getElementById('co2-level').innerText = co2;
+        document.getElementById('air-quality-status').innerText = airQualityStatus;
+    }
+
+    // Function to determine air quality status based on PM2.5 level
+    function getAirQualityStatus(pm25) {
+        if (pm25 <= 12) {
+            return 'Good';
+        } else if (pm25 <= 35) {
+            return 'Moderate';
+        } else if (pm25 <= 55) {
+            return 'Unhealthy for Sensitive Groups';
+        } else if (pm25 <= 150) {
+            return 'Unhealthy';
+        } else if (pm25 <= 250) {
+            return 'Very Unhealthy';
+        } else {
+            return 'Hazardous';
+        }
+    }
+
+    // Trigger real-time air quality updates when the button is clicked
+    document.getElementById('update-btn').addEventListener('click', function () {
+        simulateAirQualityData();
+    });
+
+    // Automatically update every 5 seconds to simulate real-time monitoring
+    setInterval(simulateAirQualityData, 5000);
+
+    // Initial data load
+    simulateAirQualityData();
+</script>
+
+</body>
+</html>
